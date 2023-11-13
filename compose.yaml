@@ -1,0 +1,20 @@
+services:
+  apache-php:
+    image: php-with-pdo
+    build: .
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+    volumes:
+      - ./src:/var/www/html
+  db:
+    image: mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: nerja123
+    volumes:
+      - ./db:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8081:80

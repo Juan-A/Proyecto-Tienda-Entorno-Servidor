@@ -1,0 +1,3 @@
+#Ignore all de dirs under ./db except ./db/proyecto1
+db/*
+!db/proyecto1
