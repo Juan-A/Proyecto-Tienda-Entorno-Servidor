@@ -42,7 +42,7 @@ require_once("inc/secciones/cabecera.php");
                         <td><?= $producto["stock"] ?></td>
                         <td>
                             <form action="anadir.php" method="POST">
-                            <input type="hidden" value="<?=$producto["codProd"]?>">
+                            <input type="hidden" value="<?=$producto["codProd"]?>" name="codProd">
                         <input type="number" name = "unidades" min=1 value=1>
                         <button type="submit">Comprar</button>
                             </form>
