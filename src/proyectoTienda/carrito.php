@@ -40,6 +40,7 @@ if(empty($_SESSION["carrito"])){
             <td>
                 <form action="eliminar.php" method="POST">
                     <input type="hidden" value="<?=$producto["codProd"]?>" name="codProd">
+                    <input type="number" value="1" name="unidades">
                     <button type="submit">Eliminar</button>
                 </form>
             </td>
