@@ -2,10 +2,11 @@
 
 function insertar_pedido($carrito, $codRes, $db)
 {
-    $fecha = date("d-m-Y H:i:s", time());
-    $sql = "INSERT INTO pedidos (fecha,enviado,restaurante) VALUES ($fecha,0,$codRes)";
+    $fecha = date("Y-m-d",time());
+    $sql = "INSERT INTO pedidos (fecha,enviado,restaurante) VALUES (:fecha,0,$codRes)";
     $db->beginTransaction();
     $consultaPrep = $db->prepare($sql);
+    $consultaPrep->bindParam(":fecha", $fecha, PDO::PARAM_STR);
     if (!$consultaPrep->execute()) {
         return false;
     }
@@ -14,7 +15,6 @@ function insertar_pedido($carrito, $codRes, $db)
     $sqlStock = "UPDATE productos SET stock = stock - :unidades WHERE codProd = :codProd ";
     $consultaPrep = $db->prepare($sqlPedProd);
     $consultaPrepStock = $db->prepare($sqlStock);
-
     foreach ($carrito as $codProd => $unidades) {
         if (!($consultaPrep->execute(array(":pedido" => $codPed, ":producto" => $codProd, ":unidades" => $unidades)))) {
             $db->rollback();
@@ -25,5 +25,6 @@ function insertar_pedido($carrito, $codRes, $db)
             return false;
         }
     }
+    $db->commit();
     return $codPed;
 }
