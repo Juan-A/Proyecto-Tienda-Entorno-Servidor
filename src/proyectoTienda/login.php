@@ -11,6 +11,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         session_start();
         $_SESSION["usuario"] = $usuario;
         $_SESSION["nombre"] = $check["nombre"];
+        $_SESSION["codRes"] = $check["codRes"];
+
         header("Location: categorias.php");
     }
 }
