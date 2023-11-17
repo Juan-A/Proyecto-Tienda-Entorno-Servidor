@@ -45,8 +45,9 @@ function envioCorreo($nombreOrigen, $correoOrigen, $correoDestino, $nombreDestin
 
     $mail = new PHPMailer();
     $mail->IsSMTP();
-    //$mail->SMTPDebug = 2;
-    $mail->SMTPAuth = true;
+    $mail->CharSet = "UTF-8";
+  //  $mail->SMTPDebug = 2;
+    $mail->SMTPAuth = false;
     $mail->SMTPSecure = "tls";
     $mail->Host = "smtp.gmail.com";
     $mail->Port = 587;
