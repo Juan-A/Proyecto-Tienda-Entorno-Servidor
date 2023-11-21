@@ -20,6 +20,16 @@ require_once("inc/secciones/cabecera.php");
 <body>
     <h1>Categorias</h1>
     <?
+    if ($_GET["exito"] == "true") {
+    ?>
+        <div class="conseguido">El pedido ha sido creado con éxito</div>
+    <?
+    } else if ($_GET["exito"] == "false") {
+
+    ?>
+        <div class="error">Ha ocurrido un error al procesar el pedido.</div>
+    <?
+    }
     $categorias = cargar_categorias($db);
     if (!$categorias) {
         echo "<h2>No hay categorias</h2>";
@@ -34,7 +44,7 @@ require_once("inc/secciones/cabecera.php");
             foreach ($categorias as $categoria) {
             ?>
                 <tr>
-                    <td><a href="productos.php?categoria=<?=$categoria["codCat"] ?>"><?= $categoria["nombre"] ?></a></td>
+                    <td><a href="productos.php?categoria=<?= $categoria["codCat"] ?>"><?= $categoria["nombre"] ?></a></td>
                     <td><?= $categoria["descripcion"] ?></td>
                 </tr>
             <?
