@@ -10,6 +10,7 @@ $mensaje = crearCorreo($_SESSION["carrito"],$codPed,$_SESSION["usuario"],$_SESSI
 try{
     envioCorreo("Gestor Pedidos","juan13herrero@gmail.com",$_SESSION["usuario"],$_SESSION["nombre"],$mensaje,"Pedido");
     envioCorreo("Nuevo pedido","juan13herrero@gmail.com","juan13herrero@gmail.com","Gestor Pedidos",$mensaje,"Pedido");
+    unset($_SESSION["carrito"]);
     header("Location: categorias.php?exito=true");
 }catch(Exception $e){
     header("Location: categorias.php?exito=false");
