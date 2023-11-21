@@ -60,14 +60,7 @@ function envioCorreo($nombreOrigen, $correoOrigen, $correoDestino, $nombreDestin
     //$mail -> addAttachment("empleado.xsd");
     $address = $correoDestino;
     $mail->AddAddress($address, $nombreDestino);
-    $resul = $mail->Send();
-    if (!$resul) {
-        //Error vale 1 con error de envio.
-        setcookie("error", 1, time() + 3600 * 24);
-    } else {
-        //Error vale 0 con envio correcto.
-        setcookie("error", 0, time() + 3600 * 24);
-    }
+    $mail->Send();
 }
 function envioCorreoMultiple($nombreOrigen, $correoOrigen, $listaCorreos, $mensaje, $asunto)
 {
