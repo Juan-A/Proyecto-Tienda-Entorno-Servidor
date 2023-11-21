@@ -12,6 +12,6 @@ try{
     envioCorreo("Nuevo pedido","juan13herrero@gmail.com","juan13herrero@gmail.com","Gestor Pedidos",$mensaje,"Pedido");
     header("Location: categorias.php?exito=true");
 }catch(Exception $e){
-    echo $e->getMessage();
+    header("Location: categorias.php?exito=false");
 }
 ?>

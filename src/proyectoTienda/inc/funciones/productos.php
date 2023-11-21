@@ -16,7 +16,7 @@ function cargar_productos($codsProducto,$db){
     $consultaPrep = $db->prepare($sql);
     $consultaPrep->execute();
     if($consultaPrep->rowCount() > 0) {
-        return $consultaPrep->fetchAll();
+       return $consultaPrep->fetchAll();
     } else {
         return false;
     }

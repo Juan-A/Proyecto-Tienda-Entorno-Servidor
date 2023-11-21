@@ -22,7 +22,8 @@ function crearCorreo($carrito, $pedido, $correo,$nombre,$db)
                         <th>Peso</th>
                         <th>Unidades</th>
                     </tr>";
-    $productos = cargar_productos($carrito, $db);
+
+    $productos = cargar_productos(array_keys($carrito), $db);
     foreach ($productos as $producto) {
         $nombre = $producto["nombre"];
         $descripcion = $producto["descripcion"];
@@ -46,8 +47,8 @@ function envioCorreo($nombreOrigen, $correoOrigen, $correoDestino, $nombreDestin
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->CharSet = "UTF-8";
-  //  $mail->SMTPDebug = 2;
-    $mail->SMTPAuth = false;
+   // $mail->SMTPDebug = 2;
+    $mail->SMTPAuth = true;
     $mail->SMTPSecure = "tls";
     $mail->Host = "smtp.gmail.com";
     $mail->Port = 587;
