@@ -58,6 +58,7 @@ nav a:hover {
     border:2px solid #000000;
     font-weight: bold;
     padding: 20px;
+    min-width: 100px;
 }
 table:not(#login) {
     border-collapse: collapse;
