@@ -14,17 +14,17 @@ require_once("inc/secciones/cabecera.php");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>categorias</title>
+    <title>Categorias</title>
 </head>
 
 <body>
     <h1>Categorias</h1>
     <?
-    if ($_GET["exito"] == "true") {
+    if (isset($_GET["exito"]) && $_GET["exito"] == "true") {
     ?>
         <div class="conseguido">El pedido ha sido creado con éxito</div>
     <?
-    } else if ($_GET["exito"] == "false") {
+    } else if (isset($_GET["exito"]) && $_GET["exito"] == "false") {
 
     ?>
         <div class="error">Ha ocurrido un error al procesar el pedido.</div>

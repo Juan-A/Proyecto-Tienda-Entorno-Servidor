@@ -1,0 +1,45 @@
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+
+}
+nav {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-evenly;
+}
+nav a {
+    display: inline-block;
+    min-width: 9rem;
+    padding: 0.5rem;
+    border-radius: 0.2rem;
+    border: solid 1px #aaa;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+}
+
+nav a:hover {
+    background-color: gray;
+}
+
+.conseguido {
+    color: green;
+    font-size: 1.5em;
+    font-weight: bold;
+    border: 2px solid black;
+}

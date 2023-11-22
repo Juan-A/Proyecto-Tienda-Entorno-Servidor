@@ -25,11 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso a la aplicación</title>
+    <link rel="stylesheet" href="inc/estilo.css">
 </head>
 
 <body>
     <?
-    if ($_GET["logout"] == "true") {
+    if (isset($_GET["logout"]) && $_GET["logout"] == "true") {
     ?>
         <div class="conseguido">Se ha cerrado la sesión correctamente.</div>
     <?
