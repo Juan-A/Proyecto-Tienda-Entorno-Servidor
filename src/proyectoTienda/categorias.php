@@ -18,42 +18,45 @@ require_once("inc/secciones/cabecera.php");
 </head>
 
 <body>
-    <h1>Categorias</h1>
-    <?
-    if (isset($_GET["exito"]) && $_GET["exito"] == "true") {
-    ?>
-        <div class="conseguido">El pedido ha sido creado con éxito</div>
-    <?
-    } else if (isset($_GET["exito"]) && $_GET["exito"] == "false") {
+    <main>
 
-    ?>
-        <div class="error">Ha ocurrido un error al procesar el pedido.</div>
-    <?
-    }
-    $categorias = cargar_categorias($db);
-    if (!$categorias) {
-        echo "<h2>No hay categorias</h2>";
-    } else {
-    ?>
-        <table>
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-            </tr>
-            <?
-            foreach ($categorias as $categoria) {
-            ?>
+        <h1>Categorias</h1>
+        <?
+        if (isset($_GET["exito"]) && $_GET["exito"] == "true") {
+        ?>
+            <div class="conseguido">El pedido ha sido creado con éxito</div>
+        <?
+        } else if (isset($_GET["exito"]) && $_GET["exito"] == "false") {
+
+        ?>
+            <div class="error">Ha ocurrido un error al procesar el pedido.</div>
+        <?
+        }
+        $categorias = cargar_categorias($db);
+        if (!$categorias) {
+            echo "<h2>No hay categorias</h2>";
+        } else {
+        ?>
+            <table>
                 <tr>
-                    <td><a href="productos.php?categoria=<?= $categoria["codCat"] ?>"><?= $categoria["nombre"] ?></a></td>
-                    <td><?= $categoria["descripcion"] ?></td>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
                 </tr>
-            <?
-            }
-            ?>
-        </table>
-    <?
-    }
-    ?>
+                <?
+                foreach ($categorias as $categoria) {
+                ?>
+                    <tr>
+                        <td><a href="productos.php?categoria=<?= $categoria["codCat"] ?>"><?= $categoria["nombre"] ?></a></td>
+                        <td><?= $categoria["descripcion"] ?></td>
+                    </tr>
+                <?
+                }
+                ?>
+            </table>
+        <?
+        }
+        ?>
+    </main>
 </body>
 
 </html>

@@ -31,6 +31,7 @@ require_once("inc/secciones/cabecera.php");
                     <th>Descripción</th>
                     <th>Peso</th>
                     <th>Stock</th>
+                    <th>Cantidad a comprar</th>
                 </tr>
                 <?
                 foreach ($productos as $producto) {

@@ -26,6 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acceso a la aplicación</title>
     <link rel="stylesheet" href="inc/estilo.css">
+    <link rel="stylesheet" href="inc/estiloLogin.css">
+
 </head>
 
 <body>
@@ -37,14 +39,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     ?>
     <form action="login.php" method="POST">
-        <div class="errorLogin"><?= (isset($error) && $error = true) ? "Revise el usuario y contraseña." : "" ?></div>
-        <div class="errorLogin"><?= (isset($_GET["redirigido"]) == true && $_GET["redirigido"] == "true") ? "Necesita estar logueado para acceder a esa página." : "" ?></div>
+        <?
+        if (isset($_GET["redirigido"]) == true && $_GET["redirigido"] == "true") {
+            echo "<div class='errorLogin'>Necesita estar logueado para acceder a esa página.</div>";
+        }
+        if (isset($error) && $error = true) {
+            echo "<div class='errorLogin'>Revise el usuario y contraseña.</div>";
+        }
+        ?>
         <fieldset>
             <legend>Acceso para Restaurantes</legend>
-            <label for="usuario">Usuario</label>
-            <input type="text" name="usuario" id="usuario" value="<?= ($_SERVER["REQUEST_METHOD"] == "POST") ? $usuario : "" ?>" placeholder="rest@rest.es">
-            <label for="clave">Clave</label>
-            <input type="password" name="clave" id="clave" placeholder="Clave">
+            <table id="login">
+                <tr>
+                    <td><label for="usuario">Usuario</label></td>
+                    <td>
+                        <input type="text" name="usuario" id="usuario" value="<?= ($_SERVER["REQUEST_METHOD"] == "POST") ? $usuario : "" ?>" placeholder="rest@rest.es">
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="clave">Clave</label></td>
+                    <td>
+                        <input type="password" name="clave" id="clave" placeholder="Clave">
+                    </td>
+                </tr>
+            </table>
             <button type="submit">Acceder</button>
         </fieldset>
     </form>
