@@ -1,99 +1,109 @@
-* {
-    box-sizing: border-box;
+body {
+    background-color: #f2f2f2;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+div#btnConfirmar {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.conseguido {
+    background-color: rgb(0, 128, 0);
+    border: 2px dotted black;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    padding: 20px;
+}
+
+.error {
+    background-color: rgb(255, 0, 0);
+    border: 2px dotted black;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    padding: 20px;
+}
+
+header {
+    background-color: #333;
+    border-bottom: 1px solid #ccc;
+    color: #fff;
+    padding: 10px;
 }
 
 html {
     height: 100%;
 }
 
-body {
-    background-color: #f2f2f2;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.9em;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-}
-
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-
-}
-
 main {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 nav {
     display: flex;
-    margin-top: 20px;
     justify-content: space-evenly;
+    margin-top: 20px;
 }
 
-nav a {
+a, button {
+    background-color: white;
+    border: solid 1px #aaa;
+    border-radius: 0.2rem;
+    color: black;
     display: inline-block;
     min-width: 9rem;
     padding: 0.5rem;
-    border-radius: 0.2rem;
-    border: solid 1px #aaa;
     text-align: center;
     text-decoration: none;
-    color: black;
-    background-color: white;
 }
 
-nav a:hover {
+nav a:hover,
+body:last-child a:hover, button:hover {
     background-color: gray;
 }
 
-.conseguido {
-    background-color: rgb(0, 128, 0);
-    padding: 20px;
-    border: 2px dotted black;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-}
-
-.error {
-    background-color: rgb(255, 0, 0);
-    padding: 20px;
-    border: 2px dotted black;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-
-}
-
 table:not(#login) {
+    border: 1px solid black;
     border-collapse: collapse;
-    border: 1px solid black;
     margin: 20px;
-}
-
-tr {
-    border: 1px solid black;
 }
 
 td {
     padding: 5px;
 }
 
-th {
-    padding: 5px;
-    border: 1px solid black;
-    background-color: #333;
+.error,
+.conseguido {
+    border: 2px dotted black;
+    border-radius: 10px;
     color: white;
+    font-weight: bold;
+    padding: 20px;
 }
 
 td:last-child {
     font-style: italic;
+}
+
+th {
+    background-color: #333;
+    border: 1px solid black;
+    color: white;
+    padding: 5px;
+}
+
+tr {
+    border: 1px solid black;
 }

@@ -52,7 +52,8 @@ require_once("inc/secciones/cabecera.php");
             ?>
 
         </table>
-        <a href="procesar_pedido.php">Procesar Pedido</a>
+        <div id="btnConfirmar"><a href="procesar_pedido.php">Procesar Pedido</a></div>
+        
 
 
 
