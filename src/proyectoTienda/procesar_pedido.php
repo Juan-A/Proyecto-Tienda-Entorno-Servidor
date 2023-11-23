@@ -13,6 +13,7 @@ try{
     unset($_SESSION["carrito"]);
     header("Location: categorias.php?exito=true");
 }catch(Exception $e){
+    $_SESSION["error"] = $e->getMessage();
     header("Location: categorias.php?exito=false");
 }
 ?>

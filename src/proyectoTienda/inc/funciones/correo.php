@@ -61,6 +61,9 @@ function envioCorreo($nombreOrigen, $correoOrigen, $correoDestino, $nombreDestin
     $address = $correoDestino;
     $mail->AddAddress($address, $nombreDestino);
     $mail->Send();
+    if (!$mail->Send()) {
+        throw new Exception("Error al enviar el correo, pedido procesado correctamente.");
+    }
 }
 function envioCorreoMultiple($nombreOrigen, $correoOrigen, $listaCorreos, $mensaje, $asunto)
 {

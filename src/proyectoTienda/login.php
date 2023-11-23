@@ -37,16 +37,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="conseguido">Se ha cerrado la sesión correctamente.</div>
     <?
     }
+
+    if (isset($_GET["redirigido"]) == true && $_GET["redirigido"] == "true") {
+        echo "<div class='error'>Necesita estar logueado para acceder a esa página.</div>";
+    }
+    if (isset($error) && $error = true) {
+        echo "<div class='error'>Revise el usuario y contraseña.</div>";
+    }
+
     ?>
     <form action="login.php" method="POST">
-        <?
-        if (isset($_GET["redirigido"]) == true && $_GET["redirigido"] == "true") {
-            echo "<div class='errorLogin'>Necesita estar logueado para acceder a esa página.</div>";
-        }
-        if (isset($error) && $error = true) {
-            echo "<div class='errorLogin'>Revise el usuario y contraseña.</div>";
-        }
-        ?>
+
         <fieldset>
             <legend>Acceso para Restaurantes</legend>
             <table id="login">

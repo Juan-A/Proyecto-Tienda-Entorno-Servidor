@@ -29,8 +29,9 @@ require_once("inc/secciones/cabecera.php");
         } else if (isset($_GET["exito"]) && $_GET["exito"] == "false") {
 
         ?>
-            <div class="error">Ha ocurrido un error al procesar el pedido.</div>
+            <div class="error"><?=$_SESSION["error"]?></div>
         <?
+        unset($_SESSION["error"]);
         }
         $categorias = cargar_categorias($db);
         if (!$categorias) {
