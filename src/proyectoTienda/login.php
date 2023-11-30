@@ -4,6 +4,8 @@ require_once("inc/funciones/usuarios.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario = $_POST["usuario"];
     $clave = $_POST["clave"];
+
+
     $check = comprobar_usuario($usuario, $clave, $db);
     if (!$check) {
         $error = true;

@@ -1,5 +1,6 @@
 <?
 require_once("inc/funciones/sesiones.php");
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $cod = $_POST["codProd"];
     $unidades = (int)$_POST["unidades"];
@@ -9,4 +10,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["carrito"][$cod] = $unidades;
     }
 }
-header("Location: carrito.php");
+
+header("Location: productos.php?categoria=".$_POST["codCat"]);

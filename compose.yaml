@@ -1,6 +1,5 @@
 services:
   apache-php:
-    image: php-with-pdo
     build: .
     ports:
       - 8080:80

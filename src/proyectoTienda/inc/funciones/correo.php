@@ -9,9 +9,22 @@ require 'inc/correo/src/SMTP.php';
 require 'inc/funciones/productos.php';
 require 'inc/bd.php';
 
+const ARCHIVO_CONF = "inc/configuracionCorreo.xml";
+const ESQUEMA = "inc/correo/configuracionCorreo.xsd";
+
 function crearCorreo($carrito, $pedido, $correo,$nombre,$db)
 {   
+    $pesoTotal = 0;
     $mensaje = "<h2>Pedido nº$pedido </h2> <h3>Restaurante: $nombre </h3>";
+    $mensaje .= "<style>
+    table, td, th {
+        border: 2px solid black;
+        border-collapse: collapse;
+    }
+    th{
+        background-color: silver;
+    }
+    </style>";
     $mensaje .= "<h4><i>Usuario: $correo </i></h4>";
     $mensaje .= "<i>Detalle del pedido</i>:";
     $mensaje .= "<br><br>";
@@ -28,39 +41,62 @@ function crearCorreo($carrito, $pedido, $correo,$nombre,$db)
         $nombre = $producto["nombre"];
         $descripcion = $producto["descripcion"];
         $peso = $producto["peso"];
+        $pesoTotal+=$peso;
         $unidades = $_SESSION["carrito"][$producto["codProd"]];
         $mensaje .= "<tr>
                         <td>$nombre</td>
-                        <td>$descripcion<td>
+                        <td>$descripcion</td>
                         <td>$peso</td>
-                        <td>$unidades<td>
+                        <td>$unidades</td>
                     </tr>";
     }
     $mensaje .= "</table>";
+    $mensaje .= "<br><br>";
+    //Modificado para que muestre el peso total del pedido, ejercicio extra.
+    $mensaje .= "<i>Peso total: $peso</i>";
     return $mensaje;
 }
+function cargarConfiguracion($archivo,$esquema){
+    $config = new DOMDocument;
+    $config->load($archivo);
 
+    if(!$config->schemaValidate($esquema)){
+        $errores = libxml_get_errors();
+        foreach($errores as $error){
+            echo "Error en la sintaxis: " . $error->message;
+        }
+        throw new Exception("Hay errores en el archivo de configuración.");
+    }
+    $configuraciones = [
+        "servidor" => $config->getElementsByTagName("servidor")->item(0)->nodeValue,
+        "puerto" => $config->getElementsByTagName("puerto")->item(0)->nodeValue,
+        "usuario" => $config->getElementsByTagName("usuario")->item(0)->nodeValue,
+        "password" => $config->getElementsByTagName("password")->item(0)->nodeValue,
+        "encriptacion" => $config->getElementsByTagName("encriptacion")->item(0)->nodeValue
+    ];
+    return $configuraciones;
+}
 
-function envioCorreo($nombreOrigen, $correoOrigen, $correoDestino, $nombreDestino, $mensaje, $asunto)
+function envioCorreo($nombreOrigen, $correoDestino, $nombreDestino, $mensaje, $asunto)
 {
-
+    $configuraciones = cargarConfiguracion(ARCHIVO_CONF,ESQUEMA);
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->CharSet = "UTF-8";
    // $mail->SMTPDebug = 2;
-    $mail->SMTPAuth = true;
-    $mail->SMTPSecure = "tls";
-    $mail->Host = "smtp.gmail.com";
-    $mail->Port = 587;
-    $mail->Username = $correoOrigen;
-    $mail->Password = "amhwftxuqtjjmxyb";
-    $mail->SetFrom($correoOrigen, $nombreOrigen);
+  //  $mail->SMTPAuth = true;
+  //  $mail->SMTPSecure = $configuraciones["encriptacion"];
+    $mail->Host = $configuraciones["servidor"];
+    $mail->Port = $configuraciones["puerto"];
+    $mail->Username = $configuraciones["usuario"];
+    $mail->Password = $configuraciones["password"];
+    // $mail->Password = "amhwftxuqtjjmxyb";
+    $mail->SetFrom($configuraciones["usuario"], $nombreOrigen);
     $mail->Subject = $asunto;
     $mail->MsgHTML($mensaje);
     //$mail -> addAttachment("empleado.xsd");
     $address = $correoDestino;
     $mail->AddAddress($address, $nombreDestino);
-    $mail->Send();
     if (!$mail->Send()) {
         throw new Exception("Error al enviar el correo, pedido procesado correctamente.");
     }

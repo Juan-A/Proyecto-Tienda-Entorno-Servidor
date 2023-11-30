@@ -42,7 +42,7 @@ require_once("inc/secciones/cabecera.php");
                     <td>
                         <form action="eliminar.php" method="POST">
                             <input type="hidden" value="<?= $producto["codProd"] ?>" name="codProd">
-                            <input type="number" value="1" name="unidades">
+                            <input type="number" value="1" name="unidades" min="0">
                             <button type="submit">Eliminar</button>
                         </form>
                     </td>
