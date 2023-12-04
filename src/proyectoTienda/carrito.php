@@ -17,9 +17,11 @@ require_once("inc/secciones/cabecera.php");
 
 <body>
     <?
+    //Si el carrito está vacío...
     if (empty($_SESSION["carrito"])) {
         echo "<h2>Carrito vacío</h2>";
     } else {
+        //Si no, cargo productos en una variable.
         $productos = cargar_productos(array_keys($_SESSION["carrito"]), $db);
 
     ?>
@@ -32,6 +34,7 @@ require_once("inc/secciones/cabecera.php");
                 <th>Eliminar</th>
             </tr>
             <?
+            //Imprimo los productos en el carrito.
             foreach ($productos as $producto) {
             ?>
                 <tr>
@@ -53,7 +56,7 @@ require_once("inc/secciones/cabecera.php");
 
         </table>
         <div id="btnConfirmar"><a href="procesar_pedido.php">Procesar Pedido</a></div>
-        
+
 
 
 

@@ -1,8 +1,10 @@
 <?
+//Cargo todas las funciones
 require_once("inc/bd.php");
 require_once("inc/funciones/sesiones.php");
 require_once("inc/funciones/categorias.php");
 require_once("inc/funciones/productos.php");
+//La cabecera última, requiere la sesión.
 require_once("inc/secciones/cabecera.php");
 ?>
 <!DOCTYPE html>
@@ -18,14 +20,18 @@ require_once("inc/secciones/cabecera.php");
 
     <?
     $cargaCategoria = cargar_categoria($_GET["categoria"], $db);
+    //Si la func. devuelve false
     if (!$cargaCategoria) {
         echo "<h2>No existe la categoria</h2>";
     } else {
+        //Si OK, devuelve la categoria y sus columnas.
         echo "<h2>Productos de la categoria " . $cargaCategoria["nombre"] . "</h2>";
+        //Almaceno los productos en un array.
         $productos = cargar_productos_categoria($_GET["categoria"], $db);
         if (!$productos) {
             echo "<h3>No hay productos en esta categoria</h3>";
         } else {
+            //Si hay productos, imprime tabla.
     ?>
             <table>
                 <tr>
@@ -49,6 +55,7 @@ require_once("inc/secciones/cabecera.php");
                             <td><?= $producto["stock"] ?></td>
                             <td>
                                 <form action="anadir.php" method="POST">
+                                    <!-- Paso en oculto codProducto y codCategoria para posterior control. -->
                                     <input type="hidden" value="<?= $producto["codProd"] ?>" name="codProd">
                                     <input type="hidden" value="<?= $producto["categoria"] ?>" name="codCat">
                                     <input type="number" name="unidades" min=1 value=1>

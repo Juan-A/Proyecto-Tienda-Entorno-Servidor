@@ -22,16 +22,19 @@ require_once("inc/secciones/cabecera.php");
 
         <h1>Categorias</h1>
         <?
+        //Si todo ha ido bien:
         if (isset($_GET["exito"]) && $_GET["exito"] == "true") {
         ?>
             <div class="conseguido">El pedido ha sido creado con éxito</div>
         <?
+            //Si ha habido algún problema...
         } else if (isset($_GET["exito"]) && $_GET["exito"] == "false") {
-
+            //Saco el error de la sesion.
         ?>
-            <div class="error"><?=$_SESSION["error"]?></div>
+            <div class="error"><?= $_SESSION["error"] ?></div>
         <?
-        unset($_SESSION["error"]);
+            //Quito el error.
+            unset($_SESSION["error"]);
         }
         $categorias = cargar_categorias($db);
         if (!$categorias) {
@@ -44,6 +47,7 @@ require_once("inc/secciones/cabecera.php");
                     <th>Descripción</th>
                 </tr>
                 <?
+                //Muestro todas las categorias de productos.
                 foreach ($categorias as $categoria) {
                 ?>
                     <tr>

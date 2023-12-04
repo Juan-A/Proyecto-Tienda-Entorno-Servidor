@@ -14,4 +14,3 @@ try {
     echo "<div class='conexFail'>Error en la conexión con la base de datos. :( </div><br> ";
     echo "Error: " . $e->getMessage();
 }
-
